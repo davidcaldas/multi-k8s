@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1alpha
+kind: Certificate
+metadata:
+    name: k8s-duosync-pt-tls
+spec:
+    secretName: k8s-duosync-pt
+    issuerRef:
+        name: letsencrypt-prod
+        kind: ClusterIssuer
+    commonName: k8s.duosync.pt
+    dnsNames:
+        - k8s.duosync.pt
+        - www.k8s.duosync.pt
+    acme:
+        config:
+            - http01:
+                  ingressClass: nginx
+              domains:
+                  - k8s.duosync.pt
+                  - www.k8s.duosync.pt
